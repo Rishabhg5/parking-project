@@ -1,0 +1,56 @@
+<?php
+session_start();
+if(!isset($_SESSION['id']) || empty($_SESSION['id'])){
+	header("location:../user_login.php");
+}
+include('include/connect.php');
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <style>
+    .card {
+        border-radius: 0;
+    }
+
+    small {}
+    </style>
+</head>
+
+<body>
+    <?php include('header_user.php'); ?>
+    <div class="container">
+        <h3>Select available slot for parking</h3>
+
+        <hr>
+        <div class="row">
+
+            <?php
+            $sql="SELECT * FROM slot_master";
+            $result=mysqli_query($conn,$sql);
+
+            while($data=mysqli_fetch_array($result)){
+
+for($i=1;$i<=60;$i++){?>
+            <div class=col-lg-1>
+                <div class="card bg-light mb-2" style="width: 100px; length:100px">
+                    <div class="card-header">
+                        <small> SLOT <?php echo $data['id'];?></small>
+                    </div>
+                </div>
+            </div>
+            <?php
+}}
+?>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
